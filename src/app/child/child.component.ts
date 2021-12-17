@@ -1,24 +1,32 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ContentChild, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.scss']
 })
-export class ChildComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() searchInput: string | undefined;
+export class ChildComponent implements OnInit, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
+  @Input() searchInput!: string;
+  @ContentChild('projectedContent') projectedContent!: ElementRef;
   constructor() {
     console.log('Child constructor is called')
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Child OnChanges', changes)
-  }
   ngOnInit(): void {
     console.log('Child ngOnInit is called')
+    console.log('OnInit content', this.projectedContent)
+    
   }
-  
-  ngOnDestroy(): void {
-    console.log('Child ngOnDestroy is called')
+  ngAfterContentInit(): void {
+    console.log('Child AfterContentInit')
+    console.log('AfterContentInit content', this.projectedContent)
   }
-
+  ngAfterContentChecked(): void {
+    console.log('Child AfterContentChecked')
+  }
+  ngAfterViewInit(): void {
+    console.log('Child AfterViewInit')
+  }
+  ngAfterViewChecked(): void {
+    console.log('Child AfterViewChecked')
+  }
 }

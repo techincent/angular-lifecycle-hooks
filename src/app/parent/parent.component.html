@@ -1,5 +1,8 @@
-<!-- <p>This parent Element</p>
+<p>This parent Element</p>
 <input type="text" [(ngModel)]="searchInput" placeholder="Parent Input" />
 <button (click)="toggleChild()">Show Child</button>
 <hr>
-<app-child *ngIf="showChild" [searchInput]="searchInput"><h3>Inside child title</h3></app-child> -->
+<app-child *ngIf="showChild" [searchInput]="searchInput">
+  <!-- Projection content -->
+  <div #projectedContent>Hello, this is project from parent</div>
+</app-child>
